@@ -15,7 +15,7 @@ if (localStorage.getItem("carrito")) {
 let cards = document.getElementById("container-items");
 let botones = document.getElementsByClassName("botonAgregar");
 const btnIcon = document.querySelector(".container-icon");
-const containerCartProducts = document.querySelector(".container-cart-products");
+const containerCartProducts = document.querySelector( ".container-cart-products");
 
 renderizarCarrito();
 
@@ -63,6 +63,9 @@ for (const boton of botones) {
         subtotal: productoAgregado.precio,
       });
     }
+    swal("Producto Agregado", "❤", "success", {
+      button: "Ok",
+    });
     localStorage.setItem("carrito", JSON.stringify(carrito));
     renderizarCarrito();
   };
