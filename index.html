@@ -5,24 +5,31 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tienda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600&family=Fraunces:wght@700;900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <title>Tienda</title>
 </head>
-
 <body>
     <header>
-        <h1>Tienda Postales</h1>
+        <div class="header__logo">
+            <h1>Tienda Postales</h1>
+        </div>
 
-        <!--CARRITO-->
+
+        <!--CARRITO MODAL-->
         <div class="container-icon">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="icon-cart">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
             </svg>
-
-
-            <div class="count-products">
+            <div id="count-products">
                 <span id="contador-productos">0</span>
             </div>
 
@@ -41,6 +48,8 @@
                 <div class="cart-total">
                     <h3>Total:</h3>
                     <span class="total-pagar"></span>
+                    <button class="vaciar-carrito"></button>
+                    <button id="compra"></button>
                 </div>
             </div>
         </div>
@@ -51,11 +60,58 @@
 
     </div>
 
+    <!--FOOTER-->
+    <footer>
+        <div class="container-fluid">
+            <div class="row p-2 pb-2 text-bg-dark p-3">
+
+                <div class="col-xs-12 col-md-6 col-lg-3">
+                    <p class="h3">Hiroshi Nagai</p>
+                </div>
+
+                <div class="col-xs-12 col-md-6 col-lg-3">
+                    <p class="h5 mb-3">Redes</p>
+                    <div class=mb-3>
+                        <a class="text-secondary text-decoration-none"
+                            href=" https://www.instagram.com/hiroshipenguinjoe/" target="_blank"> Instagram</a>
+                    </div>
+                    <i class="bi bi-globe">
+                        <a class=" mb-3 text-secondary text-decoration-none" href="http://www.hiroshinagai.com/"
+                            target="_blank">Official Page</a>
+                    </i>
+                </div>
+
+                <div class="col-xs-12 col-md-6 col-lg-3">
+                    <p class="h5 mb-3">Links</p>
+
+                    <div class=mb-3>
+                        <a class="text-secondary text-decoration-none " href="#">Terms & Conditions</a>
+                    </div>
+                    <div class=mb-3>
+                        <a class="text-secondary text-decoration-none " href="#">Privacy Policy</a>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-6 col-lg-3">
+                    <p class="h5 mb-3">Contacto</p>
+                    <p class=" text-secondary text-decoration-none ">Mail: mochips@hiroshinagai.com fax: 03-(6411) -8218
+                    </p>
+                </div>
 
 
+                <div class="col-xs-12 pt-10 ">
+                    <p class="text-white text-center"> Copyright © - All rights reserved </p>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="app.js"></script>
-   
+
 
 </body>
 

@@ -3,7 +3,7 @@
 *::before,
 *{
     margin: 0;
-    padding: 10px;
+    padding: 5px;
     box-sizing: border-box;
 }
 
@@ -12,6 +12,7 @@ body{
     max-width: 1200px;
     font-family: 'Lato';
     color: #333;
+   
 }
 
 .icon-cart{
@@ -24,6 +25,15 @@ body{
     cursor: pointer;
 }
 
+.header__logo {
+    margin-left: 30px;
+    margin-top: 15px;
+    font-family: "Fraunces", serif;
+    color: hsl(212deg, 27%, 19%);
+    font-style: -5px -5px 9px rgba(255, 255, 255, 0.45), 5px 5px 9px rgba(94, 104, 121, 0.3);
+  }
+
+
 img{
     max-width: 100%;
 }
@@ -33,7 +43,7 @@ header{
     display: flex;
     justify-content: space-between;
     padding: 30px 0 40px 0;
-}
+   }
 
 .container-icon{
     position: relative;
@@ -56,56 +66,59 @@ header{
 }
 
 #contador-productos{
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .container-cart-products{
     position: absolute;
     top: 50px;
     right: 0;
-
     background-color: #fff;
     width: 400px;
     z-index: 1;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20);
+    box-shadow: 0 10px 20px rgba(13, 13, 7, 0.601);
     border-radius: 10px;
     
-}
 
+}
 .cart-product{
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 30px;
-
-    border-bottom: 1px solid rgba(0, 0, 0, 0.20);
+    border-bottom: 1px solid rgb(47, 45, 45);
 
 }
 
-.info-cart-product{
+.info-cart-product p{
     display: flex;
     justify-content: space-between;
     flex: 0.8;
+    font-family: "Barlow", sans-serif;
+    font-size: 1rem;
 }
 
-.titulo-producto-carrito{
+.titulo-producto-carrito {
     font-size: 20px;
+
 }
 
 .precio-producto-carrito{
     font-weight: 700;
     font-size: 20px;
     margin-left: 10px;
+
 }
 
 .cantidad-producto-carrito{
     font-weight: 400;
     font-size: 20px;
+    display: flex;
 }
 
 .icon-close{
-    width: 25px;
-    height: 25px;
+    width: 50px;
+    height: 50px;
 }
 
 .icon-close:hover{
@@ -117,11 +130,14 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    align-items: center;
     padding: 20px 0;
     gap: 20px;
 }
 
 .cart-total h3{
+    display: flex;
     font-size: 20px;
     font-weight: 700;
 }
@@ -136,9 +152,6 @@ header{
 }
 
 
-
-
-/* Main */
 #container-items{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -150,7 +163,7 @@ header{
 }
 
 .item:hover{
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.696);
 }
 
 .item img{
@@ -192,3 +205,7 @@ header{
 }
 
   
+
+
+
+

@@ -1,0 +1,9 @@
+[
+    { "id": 0, "nombre": "Tennis", "precio": 800, "img": "https://resi.ze-robot.com/dl/te/tennis-court-by-hiroshi-nagai-2560%C3%971080.jpg" },
+    { "id": 1, "nombre": "House", "precio": 600, "img": "https://wallpapercrafter.com/desktop/128496-painting-Retrowave-1980s-Hiroshi-Nagai.jpg" },
+    { "id": 2,"nombre": "Beach", "precio": 900, "img": "https://preview.redd.it/si90ec62gi611.png?width=640&crop=smart&auto=webp&s=1335521c397e02ba93d7ca7118cc3c930c3d14d8" },
+    { "id": 3, "nombre": "Pool", "precio": 500, "img": "https://i.pinimg.com/originals/4a/aa/c6/4aaac676f89368247caacaee7782136c.jpg" },
+    { "id": 4, "nombre": "Car", "precio": 400, "img":"https://images.squarespace-cdn.com/content/v1/57825361440243db4a4b7830/1639465498601-GKVB225FU9E8CGI636PN/192601691_837252333839302_1307001884490810629_n.jpg?format=2500w" },
+    { "id": 5, "nombre": "City", "precio": 700, "img": "https://jpf.org.au/jpf/jpfmedia/Gallery_Nagai3.jpg" }
+  ]
+  

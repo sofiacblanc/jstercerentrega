@@ -1,114 +1,131 @@
-const productos = [
-  { id: 0, nombre: "Perro", precio: 800, img: "./img/perro.jpg" },
-  { id: 1, nombre: "Gatito", precio: 600, img: "./img/gatito.jpg" },
-  { id: 2, nombre: "Peluqueria", precio: 900, img: "./img/peluqueria.jpg" },
-  { id: 3, nombre: "Perro", precio: 500, img: "./img/perro.jpg" },
-  { id: 4, nombre: "Peluqueria", precio: 400, img: "./img/peluqueria.jpg" },
-  { id: 5, nombre: "Peluqueria", precio: 700, img: "./img/peluqueria.jpg" },
-];
-
-let carrito = [];
-if (localStorage.getItem("carrito")) {
-  carrito = JSON.parse(localStorage.getItem("carrito"));
-}
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 let cards = document.getElementById("container-items");
 let botones = document.getElementsByClassName("botonAgregar");
 const btnIcon = document.querySelector(".container-icon");
-const containerCartProducts = document.querySelector( ".container-cart-products");
+const containerCartProducts = document.querySelector(".container-cart-products");
+const contador = document.getElementById("count-products");
+const contadorProducto = document.getElementById("contador-productos");
 
-renderizarCarrito();
+fetch("./data.json")
+  .then((response) => response.json())
+  .then((arrayProductos) => renderProductos(arrayProductos));
 
 //DOM
-
-for (const producto of productos) {
-  let content = document.createElement("div");
-  content.className = "container-items";
-  content.innerHTML = `
+function renderProductos(arrayProductos) {
+  cards.innerHTML = "";
+  for (const { id, nombre, precio, img } of arrayProductos) {
+    let content = document.createElement("div");
+    content.className = "container-items";
+    content.innerHTML = `
   <div class="item">
   <figure>
-  <img src=${producto.img}>
+  <img src=${img}>
   </figure>
   <div class="info-product">
-  <h2>${producto.nombre}</h2>
-  <p class="price">$${producto.precio}</p>
-  <button id=${producto.id} class="botonAgregar">Añadir al carrito</button> 
+  <h2>${nombre}</h2>
+  <p class="price">$${precio}</p>
+  <button id=${id} class="botonAgregar">Añadir al carrito</button> 
   </div>
   </div>
   </div>
   </div>
    `;
-  cards.append(content);
+    cards.append(content);
+  }
+// Boton agregar productos
+  for (const boton of botones) {
+    boton.onclick = (e) => {
+      let productoAgregado = arrayProductos.find(
+        (producto) => producto.id == e.target.id
+      );
+      let posicionCarrito = carrito.findIndex(
+        (producto) => producto.id == productoAgregado.id
+      );
+
+      if (posicionCarrito != -1) {
+        carrito[posicionCarrito].unidades++;
+        carrito[posicionCarrito].subtotal =
+          carrito[posicionCarrito].precioprod *
+          carrito[posicionCarrito].unidades;
+      } else {
+        carrito.push({
+          id: productoAgregado.id,
+          nombre: productoAgregado.nombre,
+          precioprod: productoAgregado.precio,
+          unidades: 1,
+          subtotal: productoAgregado.precio,
+        });
+      }
+      Toastify({
+        text: "Producto Agregado ♡",
+
+        duration: 3000,
+      }).showToast();
+
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      renderizarCarrito();
+    };
+  }
 }
 
-for (const boton of botones) {
-  boton.onclick = (e) => {
-    let productoAgregado = productos.find(
-      (producto) => producto.id == e.target.id
-    );
-    let posicionCarrito = carrito.findIndex(
-      (producto) => producto.id == productoAgregado.id
-    );
-
-    if (posicionCarrito != -1) {
-      carrito[posicionCarrito].unidades++;
-      carrito[posicionCarrito].subtotal =
-        carrito[posicionCarrito].precioprod * carrito[posicionCarrito].unidades;
-    } else {
-      carrito.push({
-        id: productoAgregado.id,
-        nombre: productoAgregado.nombre,
-        precioprod: productoAgregado.precio,
-        unidades: 1,
-        subtotal: productoAgregado.precio,
-      });
-    }
-    swal("Producto Agregado", "❤", "success", {
-      button: "Ok",
-    });
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-    renderizarCarrito();
-  };
-}
-
+//modal carrito
 function renderizarCarrito() {
-  containerCartProducts.innerHTML = `
-  <div class="cart-product">
-  <div class="info-cart-product">
-  <p class="titulo-producto-carrito"></p>
-  <span class="precio-producto-carrito"></span>
-  <span class="cantidad-producto-carrito"></span>
-  <div class="cart-total">
-  <h3>Total:</h3>
-  <span class="total-pagar"></span>
-  </div>
-  <svg class="icon-close">
-  </svg>
-  </div>
-  </div>`;
-
+  containerCartProducts.innerHTML = "";
   let total = 0;
   for (const item of carrito) {
     total += item.subtotal;
     containerCartProducts.innerHTML += `
   <div class="cart-product">
   <div class="info-cart-product">
-  <p class="titulo-producto-carrito"> ${item.nombre}</p>
+  <p class="titulo-producto-carrito">${item.nombre}</p>
   <span class="precio-producto-carrito">$${item.precioprod}</span>
-  <span class="cantidad-producto-carrito">${item.unidades}</span>
-  <span class="total-pagar">${item.subtotal}</span>
+  <span class="cantidad-producto-carrito">U:${item.unidades}</span>
   </div>
   </div>`;
   }
+
   containerCartProducts.innerHTML += `
- <div class="cart-total">
+  <div class="cart-total">
   <h3>Total:</h3>
-  <span class="total-pagar">${total}</span>
-  </div>
-  <svg class="icon-close">
-  </svg>`;
+  <span class="total-pagar">$${total}</span> 
+  <button id="vaciar-carrito">Vaciar</button>
+  <button id="compra" >Comprar</button>
+  </div>`;
+
+  contador.innerText = carrito.length;
+  contadorProducto.innerText = carrito.reduce(
+    (acc, prod) => acc + prod.precio,
+    0
+  );
+  const btnCompra = document.getElementById("compra");
+  btnCompra.addEventListener('click', () =>{
+    Toastify({
+
+      text: "Gracias por su compra, Pronto recibira su pedido",
+      
+      duration: 3000
+      
+      }).showToast();
+  })
+  const btnVaciar = document.getElementById("vaciar-carrito");
+  btnVaciar.addEventListener("click", () => {
+    carrito = [];
+    renderizarCarrito();
+    localStorage.clear();
+  });
 }
 
+// botones modal
 btnIcon.addEventListener("click", () => {
   containerCartProducts.classList.toggle("hidden-cart");
 });
+
+btnIcon.addEventListener("click", () => {
+  renderizarCarrito();
+});
+
+const btnCompra = document.getElementById("compra");
+btnCompra.addEventListener('click', () =>{
+ 
+})
